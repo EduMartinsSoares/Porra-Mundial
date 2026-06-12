@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Porra Mundial 2026 · McKinsey Madrid</title>
+<style>
+  :root{
+    --bg:#080B14; --bg2:#0B1020; --card:#121A2C; --card2:#0E1524;
+    --line:rgba(255,255,255,.08); --line2:rgba(255,255,255,.05);
+    --ink:#EAF0F8; --muted:#8B98AC; --dim:#5d6a7e;
+    --blue:#4F7CFF; --blue2:#3358d4; --cyan:#3FC8E4; --gold:#F5B83D;
+    --green:#36D399; --red:#F2607A; --purple:#9B7DF0;
+    --r:16px; --r2:11px;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:
+      radial-gradient(1200px 600px at 80% -10%, #16203a 0%, rgba(8,11,20,0) 55%),
+      var(--bg);
+    color:var(--ink);font-size:16px;line-height:1.6;
+    font-family:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    -webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:30px 20px 80px}
+  .kicker{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:700}
+  h1{font-size:44px;line-height:1.05;margin:10px 0 10px;font-weight:800;letter-spacing:-.02em}
+  .sub{color:var(--muted);font-size:15.5px;max-width:640px;margin:0}
+  .live{display:inline-flex;align-items:center;gap:8px;margin-top:16px;font-size:12.5px;font-weight:700;
+    color:#cfe0ff;background:rgba(79,124,255,.12);border:1px solid rgba(79,124,255,.3);padding:6px 12px;border-radius:30px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--green);animation:pulse 1.8s infinite}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(54,211,153,.6)}70%{box-shadow:0 0 0 8px rgba(54,211,153,0)}100%{box-shadow:0 0 0 0 rgba(54,211,153,0)}}
+
+  /* Tabs */
+  .tabs{position:sticky;top:0;z-index:30;display:flex;gap:6px;flex-wrap:wrap;
+    background:rgba(8,11,20,.86);backdrop-filter:blur(10px);
+    border:1px solid var(--line);border-radius:14px;padding:7px;margin:24px 0 6px}
+  .tab-btn{appearance:none;border:0;background:transparent;color:var(--muted);
+    font:inherit;font-weight:700;font-size:14px;padding:9px 16px;border-radius:9px;cursor:pointer}
+  .tab-btn:hover{color:var(--ink)}
+  .tab-btn.active{background:linear-gradient(180deg,var(--blue),var(--blue2));color:#fff;
+    box-shadow:0 6px 18px -8px var(--blue)}
+
+  /* KPI cards */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:18px 0 6px}
+  .kpi{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:var(--r);padding:18px 18px 16px}
+  .kpi .l{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  .kpi .v{font-size:34px;font-weight:800;line-height:1.05;margin-top:10px;letter-spacing:-.01em}
+  .kpi .s{font-size:12.5px;color:var(--dim);margin-top:6px}
+  .kpi.blue .v{color:var(--blue)} .kpi.gold .v{color:var(--gold)} .kpi.cyan .v{color:var(--cyan)}
+
+  /* Panels */
+  .panel{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:var(--r);padding:22px 22px;margin:16px 0}
+  .phead{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin-bottom:4px}
+  .phead h2{font-size:21px;font-weight:800;margin:0;letter-spacing:-.01em}
+  .phead .note{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;font-weight:700}
+  .lead{color:var(--muted);font-size:14.5px;margin:6px 0 14px}
+
+  /* Rules */
+  .rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px;margin-top:6px}
+  .rule{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);padding:14px 15px}
+  .rule .h{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:700;margin-bottom:8px}
+  .rule .row{display:flex;justify-content:space-between;gap:10px;padding:3px 0;font-size:14px;color:var(--ink)}
+  .rule .row b{color:#fff;font-variant-numeric:tabular-nums}
+  .rule .row span{color:var(--muted)}
+
+  /* Comparison */
+  .cmp{width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:14px}
+  .cmp th,.cmp td{padding:9px 12px;text-align:left;border-bottom:1px solid var(--line2)}
+  .cmp th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
+  .cmp td.n{text-align:right;font-variant-numeric:tabular-nums;font-weight:700}
+  .cmp .old{color:var(--red)} .cmp .new{color:var(--green)}
+  .callout{border-left:3px solid var(--blue);background:rgba(79,124,255,.08);
+    border-radius:10px;padding:12px 16px;margin-top:14px}
+  .callout .l{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);font-weight:800;margin-bottom:6px}
+  .callout ul{margin:0;padding-left:18px} .callout li{margin:5px 0;font-size:13.8px;color:#cdd7e6}
+  details.foldable summary{cursor:pointer;color:var(--blue);font-weight:700;font-size:13.5px;list-style:none}
+  details.foldable summary::-webkit-details-marker{display:none}
+  details.foldable summary::before{content:"\25B8 ";}
+  details.foldable[open] summary::before{content:"\25BE ";}
+
+  /* Podium */
+  .podium{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;align-items:end}
+  .pod{border-radius:var(--r);padding:18px 16px;text-align:center;border:1px solid var(--line);
+    background:linear-gradient(180deg,var(--card),var(--card2));position:relative;overflow:hidden}
+  .pod::before{content:"";position:absolute;top:0;left:0;right:0;height:4px}
+  .pod.p1::before{background:var(--gold)} .pod.p2::before{background:#9fb1bd} .pod.p3::before{background:#C8843C}
+  .pod .pos{font-size:12px;font-weight:800;letter-spacing:.05em}
+  .pod.p1 .pos{color:var(--gold)} .pod.p2 .pos{color:#bcc8d2} .pod.p3 .pos{color:#d59a6a}
+  .pod .pts{font-size:38px;font-weight:800;line-height:1;margin:8px 0 2px}
+  .pod.p1{min-height:150px} .pod.p2{min-height:128px} .pod.p3{min-height:112px}
+  .pod .nm{font-weight:700;font-size:15px}
+
+  /* Tables */
+  table.lb{width:100%;border-collapse:collapse;margin-top:8px}
+  table.lb th,table.lb td{padding:12px 10px;text-align:left;border-bottom:1px solid var(--line2);font-size:14.5px}
+  table.lb th{font-size:11px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);font-weight:700}
+  table.lb td.num,table.lb th.num{text-align:right;font-variant-numeric:tabular-nums}
+  tr.row{cursor:pointer} tr.row:hover{background:rgba(255,255,255,.03)}
+  .rk{display:inline-flex;width:26px;height:26px;align-items:center;justify-content:center;
+    background:var(--bg2);border:1px solid var(--line);color:#cfd8e6;border-radius:7px;font-size:12.5px;font-weight:800}
+  .rk.g1{background:var(--gold);color:#1a1300;border-color:transparent}
+  .rk.g2{background:#9fb1bd;color:#10161f;border-color:transparent}
+  .rk.g3{background:#C8843C;color:#1a1000;border-color:transparent}
+  .mini{font-variant-numeric:tabular-nums;font-weight:700;color:#cfd8e6}
+  .tot{font-weight:800;font-size:17px}
+  .delta{font-size:11.5px;font-weight:800;margin-left:6px}
+  .up{color:var(--green)} .down{color:var(--red)}
+  .empty{color:var(--dim);font-size:13.5px;font-style:italic}
+
+  /* charts */
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;margin-top:10px;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px} .legend i{width:11px;height:11px;border-radius:3px}
+  .cats .crow{margin:11px 0}
+  .cats .ct{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:5px}
+  .cats .ct b{color:#fff}
+  .track{display:flex;height:16px;border-radius:7px;overflow:hidden;background:rgba(255,255,255,.05)}
+
+  /* Groups */
+  .gcard{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--line);
+    border-radius:var(--r);padding:16px 18px;margin:14px 0}
+  .ghead{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:8px}
+  .gname{font-size:18px;font-weight:800}
+  .gmeta{font-size:12px;color:var(--muted)}
+  table.gtable{width:100%;border-collapse:collapse}
+  table.gtable th,table.gtable td{padding:7px 8px;border-bottom:1px solid var(--line2);font-size:13.5px;text-align:left}
+  table.gtable th{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+  table.gtable td.num,table.gtable th.num{text-align:right;font-variant-numeric:tabular-nums}
+  table.gtable tr.q td:first-child{box-shadow:inset 3px 0 0 var(--green)}
+  table.gtable tr.t3 td:first-child{box-shadow:inset 3px 0 0 var(--gold)}
+  .glabel{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--blue);font-weight:800;margin:13px 0 8px}
+  .gchips{display:flex;flex-wrap:wrap;gap:7px}
+  .gchip{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;background:var(--bg2);
+    border:1px solid var(--line);border-radius:9px;padding:5px 10px}
+  .gchip .who{color:var(--muted)} .gchip b{color:#fff;font-variant-numeric:tabular-nums}
+  .gchip.lead{border-color:var(--gold)} .gchip .wh{font-size:11px}
+  .gkey{font-size:11px;color:var(--muted);margin-top:10px;display:flex;gap:16px;flex-wrap:wrap}
+  .gkey span{display:inline-flex;align-items:center;gap:6px}
+  .gkey i{width:9px;height:11px;border-radius:2px;display:inline-block}
+
+  /* Stats / premios */
+  .slabel{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--blue);font-weight:800;margin:20px 0 10px}
+  .slabel:first-child{margin-top:6px}
+  .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:13px}
+  .stat{background:var(--bg2);border:1px solid var(--line);border-radius:var(--r2);padding:16px;position:relative}
+  .stat .em{position:absolute;top:13px;right:14px;font-size:22px;opacity:.9}
+  .stat .l{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:var(--blue);font-weight:800}
+  .stat .who{font-size:19px;font-weight:800;margin-top:5px}
+  .stat .d{font-size:12.5px;color:var(--muted);margin-top:3px}
+  .stat .duo{display:flex;align-items:flex-start;gap:14px;margin-top:6px}
+  .stat .duo .vs{color:var(--dim);font-weight:700;align-self:center}
+  .stat .duo .who{font-size:16px}
+  .pleno{display:flex;gap:14px;align-items:center;
+    background:linear-gradient(180deg,rgba(54,211,153,.12),rgba(54,211,153,.04));
+    border:1px solid rgba(54,211,153,.3);border-radius:14px;padding:16px 18px;margin-bottom:4px}
+  .pleno .em{font-size:30px}
+  .pleno .l{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--green);font-weight:800}
+  .pleno .who{font-size:18px;font-weight:800;margin-top:2px} .pleno .d{font-size:13px;color:var(--muted)}
+
+  /* Quiniela */
+  .qrow{display:flex;justify-content:space-between;align-items:center;gap:10px;
+    padding:9px 0;border-bottom:1px solid var(--line2);font-size:14px}
+  .qteam{font-weight:700} .qcount{font-size:11px;background:var(--bg2);border:1px solid var(--line);
+    border-radius:30px;padding:1px 9px;color:var(--muted);margin-left:6px}
+  .qppl{color:var(--muted);font-size:12.5px}
+  .alive{color:var(--green);font-weight:700;font-size:12px}
+  .out{color:var(--red);font-weight:700;font-size:12px;text-decoration:line-through}
+
+  /* Feed */
+  .day{margin:16px 0}
+  .day .dt{font-weight:800;font-size:15px;text-transform:capitalize;display:flex;align-items:center;gap:10px}
+  .day .dt::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--blue)}
+  .day .recap{font-size:14px;color:#cdd7e6;background:rgba(79,124,255,.07);border:1px solid var(--line);
+    border-radius:10px;padding:10px 13px;margin:9px 0}
+  .match{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:11px 12px;
+    border:1px solid var(--line);border-radius:10px;margin:8px 0;cursor:pointer;background:var(--bg2)}
+  .match:hover{border-color:rgba(79,124,255,.4)}
+  .match .teams{display:flex;flex-direction:column;gap:3px;font-size:14.5px}
+  .match .tm{display:flex;align-items:center;gap:8px}
+  .match .badge{font-size:10px;color:var(--muted);background:rgba(255,255,255,.05);border-radius:5px;padding:1px 6px;margin-left:4px}
+  .match .sc{font-weight:800;font-size:19px;font-variant-numeric:tabular-nums;display:flex;align-items:center;gap:9px}
+  .caret{color:var(--dim);font-size:12px}
+  .picks{margin:-2px 0 10px;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+  .pk{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;padding:8px 13px;border-bottom:1px solid var(--line2)}
+  .pk:last-child{border-bottom:none}
+  .pk .pr{font-variant-numeric:tabular-nums;font-weight:700;color:#fff}
+  .pk .pt{font-weight:800;min-width:46px;text-align:right;font-variant-numeric:tabular-nums}
+  .ktag{font-size:9.5px;text-transform:uppercase;letter-spacing:.04em;color:#0a0e18;border-radius:4px;padding:1px 6px;margin-left:8px;font-weight:800}
+  .kt-exact{background:var(--green)} .kt-gd{background:var(--blue)} .kt-result{background:var(--gold)} .kt-miss{background:#4a5666;color:#cdd7e6}
+  .flag{font-size:17px;line-height:1}
+
+  /* Today / match center */
+  .tmatch{border:1px solid var(--line);border-radius:12px;padding:14px 15px;margin:11px 0;background:var(--bg2)}
+  .tmatch .th{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:11px}
+  .tmatch .tt{display:flex;align-items:center;gap:14px;font-size:15.5px;font-weight:700}
+  .tmatch .tt .vs{color:var(--dim);font-weight:600;font-size:13px}
+  .tmatch .st{font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;
+    padding:4px 10px;border-radius:30px;white-space:nowrap}
+  .st-soon{color:#cfe0ff;background:rgba(79,124,255,.14);border:1px solid rgba(79,124,255,.35)}
+  .st-done{color:#0a0e18;background:var(--gold)}
+  .pchips{display:flex;flex-wrap:wrap;gap:8px}
+  .pchip{display:inline-flex;align-items:center;gap:7px;font-size:13px;background:var(--card);
+    border:1px solid var(--line);border-radius:9px;padding:6px 11px}
+  .pchip .who{color:var(--muted)} .pchip b{color:#fff;font-variant-numeric:tabular-nums}
+  .pchip.exact{border-color:var(--green)} .pchip.gd{border-color:var(--blue)}
+  .pchip.result{border-color:var(--gold)} .pchip.miss{opacity:.6}
+  .pchip .ok{font-size:11px;font-weight:800}
+  .consensus{font-size:12px;color:var(--muted);margin-top:9px}
+  .consensus b{color:var(--cyan)}
+
+  /* 1v1 */
+  .h2hsel{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+  .h2hsel select{appearance:none;background:var(--bg2);color:var(--ink);border:1px solid var(--line);
+    border-radius:10px;padding:10px 14px;font:inherit;font-weight:700;min-width:170px}
+  .h2hsel .vs{color:var(--dim);font-weight:800}
+  table.h2t{width:100%;border-collapse:collapse;margin-top:14px}
+  table.h2t th,table.h2t td{padding:9px 10px;border-bottom:1px solid var(--line2);font-size:14px}
+  table.h2t th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);text-align:center}
+  table.h2t th:first-child{text-align:left}
+  table.h2t td.ml{color:var(--muted)}
+  table.h2t td.num{text-align:center;font-variant-numeric:tabular-nums;font-weight:700}
+  table.h2t td.win{color:var(--green)}
+  .h2hscore{margin-top:16px;font-size:13px;color:var(--muted)}
+  .h2bar{display:flex;gap:10px;flex-wrap:wrap;margin:9px 0}
+  .h2bar span{font-weight:700;padding:6px 12px;border-radius:9px;font-size:13px}
+  .h2bar .a{background:rgba(79,124,255,.14);color:#cfe0ff;border:1px solid rgba(79,124,255,.3)}
+  .h2bar .b{background:rgba(63,200,228,.12);color:#bff0fa;border:1px solid rgba(63,200,228,.3)}
+  .h2bar .t{background:var(--bg2);border:1px solid var(--line)}
+  .h2verdict{font-weight:800;color:var(--ink);font-size:15px;margin-top:6px}
+
+  .foot{color:var(--dim);font-size:12px;text-align:center;margin-top:30px}
+  @media(max-width:860px){
+    h1{font-size:32px}
+    .kpis{grid-template-columns:1fr 1fr}
+    .podium{grid-template-columns:1fr}
+    table.lb td.hide,table.lb th.hide{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Porra en vivo · McKinsey Madrid</div>
+  <h1>Clasificación</h1>
+  <p class="sub">Cada uno predijo los 72 partidos de grupo, los ganadores de grupo, el cuadro de
+  eliminatorias y las apuestas especiales. Los puntos suman en directo según llegan los resultados.</p>
+  <div class="live"><span class="dot"></span> EN VIVO · <span id="updated"></span></div>
+
+  <div class="tabs" id="tabs">
+    <button class="tab-btn active" data-tab="resumen">Resumen</button>
+    <button class="tab-btn" data-tab="grupos">Grupos</button>
+    <button class="tab-btn" data-tab="premios">Premios</button>
+    <button class="tab-btn" data-tab="resultados">Resultados</button>
+    <button class="tab-btn" data-tab="h2h">1 vs 1</button>
+  </div>
+
+  <!-- ===== RESUMEN ===== -->
+  <section class="tabpane" id="tab-resumen">
+    <div class="kpis" id="kpis"></div>
+
+    <div class="panel" id="todaypanel" style="display:none">
+      <div class="phead"><h2 id="todaytitle">Partidos de hoy</h2><span class="note">Apuestas de cada uno</span></div>
+      <div id="today"></div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h2>Podio</h2><span class="note" id="podnote"></span></div>
+      <div class="podium" id="podium"></div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h2>Tabla completa</h2><span class="note">Pulsa una fila para el desglose</span></div>
+      <table class="lb"><thead><tr>
+        <th>#</th><th>Participante</th>
+        <th class="num">Exactos</th><th class="num hide">Acierto</th>
+        <th class="num hide">Racha</th><th class="num">Puntos</th>
+      </tr></thead><tbody id="lbbody"></tbody></table>
+      <div class="empty" id="lbempty" style="display:none">Aún sin puntos. Cobrará vida con el primer resultado.</div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h2>Evolución</h2><span class="note">Puntos por partido jugado</span></div>
+      <div id="evo"></div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h2>De dónde salen los puntos</h2></div>
+      <div class="cats" id="cats"></div>
+    </div>
+
+    <div class="panel">
+      <div class="phead"><h2>Cómo funciona</h2><span class="note">Puntuación v3</span></div>
+      <div class="lead">El reparto de puntos premia la consistencia, no solo clavar marcadores.</div>
+      <div class="rules" id="rules"></div>
+      <div id="howdiff"></div>
+    </div>
+  </section>
+
+  <!-- ===== GRUPOS ===== -->
+  <section class="tabpane" id="tab-grupos" style="display:none">
+    <div class="panel">
+      <div class="phead"><h2>Grupos</h2><span class="note">Clasificación en directo · puntos por participante</span></div>
+      <div class="lead">Clasificación real de cada grupo y cuántos puntos ha sacado cada uno en él.</div>
+      <div id="groups"></div>
+    </div>
+  </section>
+
+  <!-- ===== PREMIOS ===== -->
+  <section class="tabpane" id="tab-premios" style="display:none">
+    <div class="panel">
+      <div class="phead"><h2>Stats &amp; premios</h2><span class="note">Quién destaca en qué</span></div>
+      <div id="stats"></div>
+    </div>
+    <div class="panel">
+      <div class="phead"><h2>Quiniela de campeón</h2></div>
+      <div id="quiniela"></div>
+    </div>
+  </section>
+
+  <!-- ===== RESULTADOS ===== -->
+  <section class="tabpane" id="tab-resultados" style="display:none">
+    <div class="panel">
+      <div class="phead"><h2>Lo que ha pasado</h2><span class="note">Pulsa un partido para ver las apuestas</span></div>
+      <div id="feed"></div>
+    </div>
+  </section>
+
+  <!-- ===== 1v1 ===== -->
+  <section class="tabpane" id="tab-h2h" style="display:none">
+    <div class="panel">
+      <div class="phead"><h2>1 vs 1</h2><span class="note">Cara a cara</span></div>
+      <div class="lead">Elige a dos participantes y compáralos punto por punto.</div>
+      <div id="h2h"></div>
+    </div>
+  </section>
+
+  <div class="foot">Generado automáticamente · puntuación v3 · horas en hora peninsular</div>
+</div>
+
+<script>
+const DATA = {"meta": {"updated": "2026-06-12 10:15", "tz": "hora peninsular (CEST)", "played": 2, "total": 104, "group_total": 72, "phase": "Fase de grupos", "participants": 6}, "scoring": {"group": {"exact": 6, "gd": 4, "result": 2}, "group_winner": 8, "knockout": {"R32": 2, "R16": 5, "QF": 9, "SF": 14, "Final": 20}, "bonus": {"champion": 40, "runner_up": 20, "third": 12, "top_scoring_team": 12, "golden_boot": 25, "best_player": 25, "final_penalties": 5}}, "scoring_prev": {"exact": 10, "gd": 3, "result": 5, "group_winner": 0, "knockout": "+3 -> +15 (plano)", "champion": 30, "runner_up": 15, "third": 10, "top_scoring_team": 10, "golden_boot": 20, "best_player": 20, "final_penalties": 5}, "diffs": ["Gradiente coherente en grupos: exacto 6 > resultado+DG 4 > ganador 2. En el Excel acertar resultado+diferencia (3) valia MENOS que acertar solo el ganador (5), lo cual no tiene sentido.", "Menos loteria del marcador: el exacto pasa de 10 a 6, asi clavar el resultado no dispara la clasificacion de golpe y premia mas la consistencia.", "Se premian los grupos: +8 por acertar el 1.o de cada grupo (en el Excel las clasificaciones no daban nada).", "Eliminatorias que acumulan: cada equipo tuyo suma en CADA ronda que alcanza (+2/+5/+9/+14/+20). Un finalista bien seguido vale 50; en el Excel era un +3->+15 plano que apenas movia la tabla.", "Bonus algo mas altos y repartidos (campeon 40, bota 25, MVP 25) para que el final del torneo siga siendo decisivo."], "leaderboard": [{"nick": "Marquesh", "total": 12, "buckets": {"Grupos": 12, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "rank": 1, "detail": {"exact": 2, "gd": 0, "result": 0, "miss": 0, "group_played": 2, "group_correct": 2, "match_results": {"GA-1": "exact", "GA-2": "exact"}}, "kpis": {"exact": 2, "played": 2, "correct": 2, "pct": 100, "streak": 2}}, {"nick": "BB", "total": 10, "buckets": {"Grupos": 10, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "rank": 2, "detail": {"exact": 1, "gd": 1, "result": 0, "miss": 0, "group_played": 2, "group_correct": 2, "match_results": {"GA-1": "exact", "GA-2": "gd"}}, "kpis": {"exact": 1, "played": 2, "correct": 2, "pct": 100, "streak": 2}}, {"nick": "Viti", "total": 8, "buckets": {"Grupos": 8, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "rank": 3, "detail": {"exact": 1, "gd": 0, "result": 1, "miss": 0, "group_played": 2, "group_correct": 2, "match_results": {"GA-1": "result", "GA-2": "exact"}}, "kpis": {"exact": 1, "played": 2, "correct": 2, "pct": 100, "streak": 2}}, {"nick": "El Nano", "total": 6, "buckets": {"Grupos": 6, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "rank": 4, "detail": {"exact": 0, "gd": 1, "result": 1, "miss": 0, "group_played": 2, "group_correct": 2, "match_results": {"GA-1": "result", "GA-2": "gd"}}, "kpis": {"exact": 0, "played": 2, "correct": 2, "pct": 100, "streak": 2}}, {"nick": "Johnny Boy", "total": 6, "buckets": {"Grupos": 6, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "rank": 4, "detail": {"exact": 1, "gd": 0, "result": 0, "miss": 1, "group_played": 2, "group_correct": 1, "match_results": {"GA-1": "exact", "GA-2": "miss"}}, "kpis": {"exact": 1, "played": 2, "correct": 1, "pct": 50, "streak": 0}}, {"nick": "Manolito Adebayor", "total": 6, "buckets": {"Grupos": 6, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "rank": 4, "detail": {"exact": 1, "gd": 0, "result": 0, "miss": 1, "group_played": 2, "group_correct": 1, "match_results": {"GA-1": "exact", "GA-2": "miss"}}, "kpis": {"exact": 1, "played": 2, "correct": 1, "pct": 50, "streak": 0}}], "history": [{"date": "2026-06-11", "ts": "2026-06-11 22:06", "totals": {"BB": 0, "El Nano": 0, "Johnny Boy": 0, "Manolito Adebayor": 0, "Marquesh": 0, "Viti": 0}, "buckets": {"BB": {"Grupos": 0, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "El Nano": {"Grupos": 0, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Johnny Boy": {"Grupos": 0, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Manolito Adebayor": {"Grupos": 0, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Marquesh": {"Grupos": 0, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Viti": {"Grupos": 0, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}}, "rank": {"BB": 1, "El Nano": 1, "Johnny Boy": 1, "Manolito Adebayor": 1, "Marquesh": 1, "Viti": 1}}, {"date": "2026-06-12", "ts": "2026-06-12 10:15", "totals": {"Marquesh": 12, "BB": 10, "Viti": 8, "El Nano": 6, "Johnny Boy": 6, "Manolito Adebayor": 6}, "buckets": {"Marquesh": {"Grupos": 12, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "BB": {"Grupos": 10, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Viti": {"Grupos": 8, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "El Nano": {"Grupos": 6, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Johnny Boy": {"Grupos": 6, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}, "Manolito Adebayor": {"Grupos": 6, "Ganadores": 0, "Eliminatorias": 0, "Bonus": 0}}, "rank": {"Marquesh": 1, "BB": 2, "Viti": 3, "El Nano": 4, "Johnny Boy": 4, "Manolito Adebayor": 4}}], "today": {"date": "2026-06-12", "is_today": true, "matches": [{"code": "GA-2", "home": "South Korea", "away": "Czechia", "t": "04:00", "md": 1, "played": true, "res": {"hg": 2, "ag": 1}, "picks": [{"nick": "Marquesh", "pred": "2-1", "kind": "exact", "pts": 6}, {"nick": "Viti", "pred": "2-1", "kind": "exact", "pts": 6}, {"nick": "BB", "pred": "1-0", "kind": "gd", "pts": 4}, {"nick": "El Nano", "pred": "1-0", "kind": "gd", "pts": 4}, {"nick": "Johnny Boy", "pred": "1-1", "kind": "miss", "pts": 0}, {"nick": "Manolito Adebayor", "pred": "1-1", "kind": "miss", "pts": 0}], "consensus": "1-0", "consensus_n": 2}, {"code": "GB-1", "home": "Canada", "away": "Bosnia and Herzegovina", "t": "21:00", "md": 1, "played": false, "res": null, "picks": [{"nick": "BB", "pred": "2-1"}, {"nick": "El Nano", "pred": "1-0"}, {"nick": "Johnny Boy", "pred": "3-0"}, {"nick": "Manolito Adebayor", "pred": "2-1"}, {"nick": "Marquesh", "pred": "2-1"}, {"nick": "Viti", "pred": "1-0"}], "consensus": "2-1", "consensus_n": 3}]}, "groups": [{"letter": "A", "played": 2, "total": 6, "decided": false, "winner": null, "table": [{"team": "Mexico", "P": 1, "W": 1, "D": 0, "L": 0, "GF": 2, "GA": 0, "Pts": 3, "GD": 2, "pos": 1, "qualify": true, "third": false}, {"team": "South Korea", "P": 1, "W": 1, "D": 0, "L": 0, "GF": 2, "GA": 1, "Pts": 3, "GD": 1, "pos": 2, "qualify": true, "third": false}, {"team": "Czechia", "P": 1, "W": 0, "D": 0, "L": 1, "GF": 1, "GA": 2, "Pts": 0, "GD": -1, "pos": 3, "qualify": false, "third": true}, {"team": "South Africa", "P": 1, "W": 0, "D": 0, "L": 1, "GF": 0, "GA": 2, "Pts": 0, "GD": -2, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "Marquesh", "pts": 12, "exact": 2, "winner_hit": false, "winner_pick": "Mexico"}, {"nick": "BB", "pts": 10, "exact": 1, "winner_hit": false, "winner_pick": "Mexico"}, {"nick": "Viti", "pts": 8, "exact": 1, "winner_hit": false, "winner_pick": "South Korea"}, {"nick": "El Nano", "pts": 6, "exact": 0, "winner_hit": false, "winner_pick": "Mexico"}, {"nick": "Johnny Boy", "pts": 6, "exact": 1, "winner_hit": false, "winner_pick": "South Africa"}, {"nick": "Manolito Adebayor", "pts": 6, "exact": 1, "winner_hit": false, "winner_pick": "Mexico"}]}, {"letter": "B", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Bosnia and Herzegovina", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Canada", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Qatar", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Switzerland", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Canada"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Switzerland"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Canada"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Switzerland"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Switzerland"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Canada"}]}, {"letter": "C", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Brazil", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Haiti", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Morocco", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Scotland", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Brazil"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Brazil"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Morocco"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Morocco"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Brazil"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Brazil"}]}, {"letter": "D", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Australia", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Paraguay", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Turkey", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "United States", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Turkey"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Turkey"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Paraguay"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Turkey"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Turkey"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Australia"}]}, {"letter": "E", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Curacao", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Ecuador", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Germany", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Ivory Coast", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Germany"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Germany"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Germany"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Germany"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Germany"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Germany"}]}, {"letter": "F", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Japan", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Netherlands", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Sweden", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Tunisia", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Netherlands"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Netherlands"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Netherlands"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Netherlands"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Netherlands"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Netherlands"}]}, {"letter": "G", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Belgium", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Egypt", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Iran", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "New Zealand", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Belgium"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Belgium"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Egypt"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Belgium"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Egypt"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Belgium"}]}, {"letter": "H", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Cape Verde", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Saudi Arabia", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Spain", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Uruguay", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Spain"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Spain"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Spain"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Spain"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Spain"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Spain"}]}, {"letter": "I", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "France", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Iraq", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Norway", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Senegal", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "France"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "France"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "France"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "France"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "France"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "France"}]}, {"letter": "J", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Algeria", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "Argentina", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Austria", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Jordan", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Argentina"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Argentina"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Argentina"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Austria"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Argentina"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Argentina"}]}, {"letter": "K", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Colombia", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "DR Congo", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Portugal", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Uzbekistan", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Portugal"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Portugal"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Portugal"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Portugal"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Portugal"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Portugal"}]}, {"letter": "L", "played": 0, "total": 6, "decided": false, "winner": null, "table": [{"team": "Croatia", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 1, "qualify": true, "third": false}, {"team": "England", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 2, "qualify": true, "third": false}, {"team": "Ghana", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 3, "qualify": false, "third": true}, {"team": "Panama", "P": 0, "W": 0, "D": 0, "L": 0, "GF": 0, "GA": 0, "Pts": 0, "GD": 0, "pos": 4, "qualify": false, "third": false}], "people": [{"nick": "BB", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Croatia"}, {"nick": "El Nano", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "England"}, {"nick": "Johnny Boy", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "Croatia"}, {"nick": "Manolito Adebayor", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "England"}, {"nick": "Marquesh", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "England"}, {"nick": "Viti", "pts": 0, "exact": 0, "winner_hit": false, "winner_pick": "England"}]}], "curve": [{"x": 0, "label": "Inicio", "totals": {"BB": 0, "El Nano": 0, "Johnny Boy": 0, "Manolito Adebayor": 0, "Marquesh": 0, "Viti": 0}}, {"x": 1, "label": "MEX-SOU", "score": "2-0", "totals": {"BB": 6, "El Nano": 2, "Johnny Boy": 6, "Manolito Adebayor": 6, "Marquesh": 6, "Viti": 2}}, {"x": 2, "label": "SOU-CZE", "score": "2-1", "totals": {"BB": 10, "El Nano": 6, "Johnny Boy": 6, "Manolito Adebayor": 6, "Marquesh": 12, "Viti": 8}}], "stats": {"pulpo": {"nick": "Marquesh", "value": 2, "detail": "2 exactos"}, "francotirador": null, "racha": {"nick": "BB", "value": 2, "detail": "2 seguidos"}, "pleno": {"date": "2026-06-12", "people": [{"nick": "Marquesh", "n": 1}, {"nick": "Viti", "n": 1}]}, "optimista": {"nick": "Marquesh", "value": 2.97, "detail": "2.97 goles/partido"}, "cerrojo": {"nick": "BB", "value": 1.83, "detail": "1.83 goles/partido"}, "valiente": null, "capitan": {"nick": "Marquesh", "value": 2, "detail": "2 actualizaciones líder"}, "vivos": null}, "champion_picks": [{"nick": "BB", "pick": "Spain", "alive": null}, {"nick": "El Nano", "pick": "Spain", "alive": null}, {"nick": "Johnny Boy", "pick": "Portugal", "alive": null}, {"nick": "Manolito Adebayor", "pick": "Spain", "alive": null}, {"nick": "Marquesh", "pick": "Spain", "alive": null}, {"nick": "Viti", "pick": "Spain", "alive": null}], "golden_boot_picks": [{"nick": "BB", "pick": "Cristiano Ronaldo", "alive": null}, {"nick": "El Nano", "pick": "Vinicius Jr", "alive": null}, {"nick": "Johnny Boy", "pick": "Kylian Mbappé", "alive": null}, {"nick": "Manolito Adebayor", "pick": "Kylian Mbappé", "alive": null}, {"nick": "Marquesh", "pick": "Kylian Mbappé", "alive": null}, {"nick": "Viti", "pick": "Lamine Yamal", "alive": null}], "best_player_picks": [{"nick": "BB", "pick": "Luka Modrić", "alive": null}, {"nick": "El Nano", "pick": "Pedri", "alive": null}, {"nick": "Johnny Boy", "pick": "Vitinha", "alive": null}, {"nick": "Manolito Adebayor", "pick": "Pedri", "alive": null}, {"nick": "Marquesh", "pick": "Lamine Yamal", "alive": null}, {"nick": "Viti", "pick": "Lionel Messi", "alive": null}], "feed": [{"date": "2026-06-12", "recap": "", "matches": [{"code": "GA-2", "t": "04:00", "md": 1, "home": "South Korea", "away": "Czechia", "hg": 2, "ag": 1, "picks": [{"nick": "Marquesh", "pred": "2-1", "pts": 6, "kind": "exact"}, {"nick": "Viti", "pred": "2-1", "pts": 6, "kind": "exact"}, {"nick": "BB", "pred": "1-0", "pts": 4, "kind": "gd"}, {"nick": "El Nano", "pred": "1-0", "pts": 4, "kind": "gd"}, {"nick": "Johnny Boy", "pred": "1-1", "pts": 0, "kind": "miss"}, {"nick": "Manolito Adebayor", "pred": "1-1", "pts": 0, "kind": "miss"}]}]}, {"date": "2026-06-11", "recap": "", "matches": [{"code": "GA-1", "t": "21:00", "md": 1, "home": "Mexico", "away": "South Africa", "hg": 2, "ag": 0, "picks": [{"nick": "BB", "pred": "2-0", "pts": 6, "kind": "exact"}, {"nick": "Johnny Boy", "pred": "2-0", "pts": 6, "kind": "exact"}, {"nick": "Manolito Adebayor", "pred": "2-0", "pts": 6, "kind": "exact"}, {"nick": "Marquesh", "pred": "2-0", "pts": 6, "kind": "exact"}, {"nick": "El Nano", "pred": "1-0", "pts": 2, "kind": "result"}, {"nick": "Viti", "pred": "2-1", "pts": 2, "kind": "result"}]}]}]};
+const PALETTE = ["#4F7CFF","#3FC8E4","#F5B83D","#36D399","#F2607A","#9B7DF0","#E58F4E","#5BD1B0"];
+const $ = (id)=>document.getElementById(id);
+const esc = (s)=>String(s==null?"":s).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const colorFor=(i)=>PALETTE[i%PALETTE.length];
+
+const ISO={"Mexico":"MX","South Africa":"ZA","South Korea":"KR","Czechia":"CZ","Canada":"CA",
+"Bosnia and Herzegovina":"BA","Qatar":"QA","Switzerland":"CH","Brazil":"BR","Morocco":"MA","Haiti":"HT",
+"United States":"US","Paraguay":"PY","Australia":"AU","Turkey":"TR","Germany":"DE","Curacao":"CW",
+"Ivory Coast":"CI","Ecuador":"EC","Netherlands":"NL","Japan":"JP","Sweden":"SE","Tunisia":"TN",
+"Belgium":"BE","Egypt":"EG","Iran":"IR","New Zealand":"NZ","Spain":"ES","Cape Verde":"CV",
+"Saudi Arabia":"SA","Uruguay":"UY","France":"FR","Senegal":"SN","Iraq":"IQ","Norway":"NO",
+"Argentina":"AR","Algeria":"DZ","Austria":"AT","Jordan":"JO","Ghana":"GH","Panama":"PA",
+"Croatia":"HR","Portugal":"PT","DR Congo":"CD","Uzbekistan":"UZ","Colombia":"CO"};
+function flag(team){
+  if(team==="England")return "\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC65\uDB40\uDC6E\uDB40\uDC67\uDB40\uDC7F";
+  if(team==="Scotland")return "\uD83C\uDFF4\uDB40\uDC67\uDB40\uDC62\uDB40\uDC73\uDB40\uDC63\uDB40\uDC74\uDB40\uDC7F";
+  const c=ISO[team]; if(!c)return "\u26BD";
+  return String.fromCodePoint(...[...c].map(x=>0x1F1E6+x.charCodeAt(0)-65));
+}
+
+function renderHeader(){
+  const m=DATA.meta, lb=DATA.leaderboard;
+  $("updated").textContent="Act. "+m.updated;
+  const leader=(lb[0]&&lb[0].total>0)?lb[0].nick:"\u2014";
+  const top=(lb[0]?lb[0].total:0);
+  $("kpis").innerHTML=
+    kpi("Partidos jugados", `${m.played}<span style="font-size:18px;color:var(--dim)">/${m.total}</span>`, m.phase,"")+
+    kpi("Participantes", m.participants, "de la oficina","")+
+    kpi("Líder", `<span style="font-size:24px">${esc(leader)}</span>`, "primer puesto","blue")+
+    kpi("Mejor marca", top, "puntos en cabeza","gold");
+}
+function kpi(l,v,s,cls){return `<div class="kpi ${cls}"><div class="l">${l}</div><div class="v">${v}</div><div class="s">${s}</div></div>`;}
+
+function renderToday(){
+  const t=DATA.today;if(!t||!t.matches||!t.matches.length)return;
+  $("todaypanel").style.display="";
+  const fmt=(d)=>new Date(d+"T12:00:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
+  $("todaytitle").textContent=(t.is_today?"Partidos de hoy":"Próximos partidos")+" · "+fmt(t.date);
+  let html="";
+  t.matches.forEach(m=>{
+    const st=m.played
+      ? `<span class="st st-done">Final ${m.res.hg}-${m.res.ag}</span>`
+      : `<span class="st st-soon">${m.t}</span>`;
+    html+=`<div class="tmatch"><div class="th"><div class="tt">`+
+      `<span><span class="flag">${flag(m.home)}</span> ${esc(m.home)}</span>`+
+      `<span class="vs">vs</span>`+
+      `<span><span class="flag">${flag(m.away)}</span> ${esc(m.away)}</span>`+
+      `<span class="badge">J${m.md}</span></div>${st}</div><div class="pchips">`;
+    m.picks.forEach(p=>{
+      const cls=m.played?(" "+(p.kind||"")):"";
+      const tag=m.played&&p.kind&&p.kind!=="miss"?`<span class="ok" style="color:var(--green)">+${p.pts}</span>`:
+                (m.played?`<span class="ok" style="color:var(--dim)">0</span>`:"");
+      html+=`<span class="pchip${cls}"><span class="who">${esc(p.nick)}</span> <b>${esc(p.pred)}</b> ${tag}</span>`;
+    });
+    html+=`</div>`;
+    if(m.consensus)html+=`<div class="consensus">Consenso: <b>${m.consensus}</b> (${m.consensus_n} de ${m.picks.length})</div>`;
+    html+=`</div>`;
+  });
+  $("today").innerHTML=html;
+}
+
+function renderRules(){
+  const s=DATA.scoring,g=s.group,k=s.knockout,b=s.bonus;
+  $("rules").innerHTML=
+    rule("Partidos de grupo",[["Marcador exacto",g.exact],["Resultado + dif. goles",g.gd],["Solo el ganador",g.result]])+
+    rule("Ganador de grupo",[["1.º correcto","+"+s.group_winner]])+
+    rule("Eliminatorias · acumulan",[["Dieciseisavos","+"+k.R32],["Octavos","+"+k.R16],["Cuartos","+"+k.QF],["Semis","+"+k.SF],["Final","+"+k.Final]])+
+    rule("Bonus",[["Campeón","+"+b.champion],["Subcampeón","+"+b.runner_up],["3.º","+"+b.third],["Equipo + goleador","+"+b.top_scoring_team],["Bota de Oro","+"+b.golden_boot],["Mejor jugador","+"+b.best_player],["Final por penaltis","+"+b.final_penalties]]);
+  renderDiff();
+}
+function rule(h,rows){return `<div class="rule"><div class="h">${h}</div>`+
+  rows.map(r=>`<div class="row"><span>${r[0]}</span><b>${r[1]}</b></div>`).join("")+`</div>`;}
+
+function renderDiff(){
+  const n=DATA.scoring,o=DATA.scoring_prev;if(!o)return;
+  const rows=[
+    ["Marcador exacto",o.exact,n.group.exact],
+    ["Resultado + dif. goles",o.gd,n.group.gd],
+    ["Solo el ganador",o.result,n.group.result],
+    ["Ganador de grupo","\u2014","+"+n.group_winner],
+    ["Eliminatorias",o.knockout,"+"+n.knockout.R32+"\u2026+"+n.knockout.Final],
+    ["Campeón / Bota / MVP",`${o.champion}/${o.golden_boot}/${o.best_player}`,`${n.bonus.champion}/${n.bonus.golden_boot}/${n.bonus.best_player}`],
+  ];
+  let html=`<details class="foldable" style="margin-top:16px"><summary>En qué se diferencia del esquema que venía en el Excel</summary>`;
+  html+=`<table class="cmp"><thead><tr><th>Concepto</th><th class="n">Excel original</th><th class="n">Nuestra v3</th></tr></thead><tbody>`;
+  rows.forEach(r=>{html+=`<tr><td>${r[0]}</td><td class="n old">${r[1]}</td><td class="n new">${r[2]}</td></tr>`;});
+  html+=`</tbody></table>`;
+  html+=`<div class="callout"><div class="l">Por qué es mejor</div><ul>`+
+    (DATA.diffs||[]).map(d=>`<li>${esc(d)}</li>`).join("")+`</ul></div></details>`;
+  $("howdiff").innerHTML=html;
+}
+
+function renderPodium(){
+  const lb=DATA.leaderboard.slice(0,3);const order=[1,0,2];const cls=["p1","p2","p3"];const pos=["1.º","2.º","3.º"];
+  $("podnote").textContent=(lb[0]&&lb[0].total>0)?"":"a la espera del primer resultado";
+  let html="";
+  for(const idx of order){const r=lb[idx];if(!r){html+="<div></div>";continue;}
+    html+=`<div class="pod ${cls[idx]}"><div class="pos">${pos[idx]}</div>`+
+      `<div class="pts">${r.total}</div><div class="nm">${esc(r.nick)}</div></div>`;}
+  $("podium").innerHTML=html;
+}
+
+function deltas(){const h=DATA.history,o={};if(h.length<2)return o;
+  const c=h[h.length-1],p=h[h.length-2];
+  for(const n in c.totals)o[n]=c.totals[n]-(p.totals[n]||0);return o;}
+
+function renderLeaderboard(){
+  const lb=DATA.leaderboard,d=deltas();
+  if(!lb.length||lb.every(r=>r.total===0))$("lbempty").style.display="block";
+  const body=$("lbbody");body.innerHTML="";
+  lb.forEach(r=>{
+    const dl=d[r.nick];let da="";
+    if(dl>0)da=`<span class="delta up">\u25B2${dl}</span>`;else if(dl<0)da=`<span class="delta down">\u25BC${-dl}</span>`;
+    const gc=r.rank<=3?` g${r.rank}`:"";
+    const k=r.kpis||{};
+    const pct=(k.pct==null)?"\u2014":k.pct+"%";
+    const streak=k.streak>0?`\uD83D\uDD25 ${k.streak}`:"\u2014";
+    const tr=document.createElement("tr");tr.className="row";
+    tr.innerHTML=`<td><span class="rk${gc}">${r.rank}</span></td>`+
+      `<td><b>${esc(r.nick)}</b></td>`+
+      `<td class="num"><span class="mini">${k.exact||0}</span></td>`+
+      `<td class="num hide"><span class="mini">${pct}</span></td>`+
+      `<td class="num hide"><span class="mini">${streak}</span></td>`+
+      `<td class="num"><span class="tot">${r.total}</span>${da}</td>`;
+    const ex=document.createElement("tr");ex.style.display="none";
+    const dt=r.detail||{};
+    ex.innerHTML=`<td colspan="6" style="background:var(--bg2);font-size:13px;color:var(--muted)">`+
+      `Exactos <b style="color:#fff">${dt.exact||0}</b> · Result.+DG <b style="color:#fff">${dt.gd||0}</b> · `+
+      `Solo ganador <b style="color:#fff">${dt.result||0}</b> · Fallos <b style="color:#fff">${dt.miss||0}</b> &nbsp;|&nbsp; `+
+      `Grupos ${r.buckets.Grupos} · Ganadores ${r.buckets.Ganadores} · Eliminatorias ${r.buckets.Eliminatorias} · Bonus ${r.buckets.Bonus}</td>`;
+    tr.onclick=()=>{ex.style.display=ex.style.display==="none"?"":"none";};
+    body.appendChild(tr);body.appendChild(ex);
+  });
+}
+
+function svgEl(w,h){const ns="http://www.w3.org/2000/svg";const s=document.createElementNS(ns,"svg");
+  s.setAttribute("viewBox",`0 0 ${w} ${h}`);s.setAttribute("width","100%");s.style.maxWidth=w+"px";return s;}
+function mk(t,a){const ns="http://www.w3.org/2000/svg";const e=document.createElementNS(ns,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+
+function renderEvolution(){
+  const c=DATA.curve||[];const host=$("evo");
+  if(c.length<2){host.innerHTML=`<div class="empty">La curva aparece con el primer partido jugado.</div>`;return;}
+  const names=DATA.leaderboard.map(r=>r.nick);
+  const W=980,H=320,pad=42,padR=14;
+  const maxY=Math.max(6,...c.flatMap(s=>Object.values(s.totals)));
+  const n=c.length-1;
+  const x=i=>pad+(W-pad-padR)*(n===0?0:i/n);
+  const y=v=>H-pad-(H-2*pad)*(v/maxY);
+  const svg=svgEl(W,H);
+  for(let g=0;g<=4;g++){const vy=pad+(H-2*pad)*g/4;const val=Math.round(maxY*(1-g/4));
+    svg.appendChild(mk("line",{x1:pad,y1:vy,x2:W-padR,y2:vy,stroke:"rgba(255,255,255,.06)"}));
+    const t=mk("text",{x:6,y:vy+4,"font-size":11,fill:"#5d6a7e"});t.textContent=val;svg.appendChild(t);}
+  const step=Math.ceil(n/8)||1;
+  c.forEach((s,i)=>{if(i===0)return;if(i%step!==0&&i!==n)return;
+    const t=mk("text",{x:x(i),y:H-pad+16,"font-size":10,fill:"#5d6a7e","text-anchor":"middle"});
+    t.textContent=s.label;svg.appendChild(t);});
+  const xt=mk("text",{x:(W)/2,y:H-6,"font-size":10.5,fill:"#8B98AC","text-anchor":"middle"});
+  xt.textContent="partidos jugados \u2192";svg.appendChild(xt);
+  names.forEach((nm,idx)=>{
+    let d="";c.forEach((s,i)=>{d+=(i?"L":"M")+x(i)+" "+y(s.totals[nm]||0)+" ";});
+    svg.appendChild(mk("path",{d,fill:"none",stroke:colorFor(idx),"stroke-width":2.6,"stroke-linejoin":"round"}));
+    svg.appendChild(mk("circle",{cx:x(n),cy:y(c[n].totals[nm]||0),r:3.4,fill:colorFor(idx)}));
+  });
+  host.appendChild(svg);
+  host.insertAdjacentHTML("beforeend",`<div class="legend">`+
+    names.map((nm,i)=>`<span><i style="background:${colorFor(i)}"></i>${esc(nm)}</span>`).join("")+`</div>`);
+}
+
+function renderCats(){
+  const lb=DATA.leaderboard,host=$("cats");
+  const keys=["Grupos","Ganadores","Eliminatorias","Bonus"];
+  const cols={Grupos:"#4F7CFF",Ganadores:"#3FC8E4",Eliminatorias:"#F5B83D",Bonus:"#36D399"};
+  if(lb.every(r=>r.total===0)){host.innerHTML=`<div class="empty">Sin puntos todavía.</div>`;return;}
+  const maxT=Math.max(1,...lb.map(r=>r.total));let html="";
+  lb.forEach(r=>{html+=`<div class="crow"><div class="ct"><span>${esc(r.nick)}</span><b>${r.total}</b></div><div class="track">`;
+    keys.forEach(k=>{const w=100*r.buckets[k]/maxT;if(w>0)html+=`<div title="${k}: ${r.buckets[k]}" style="width:${w}%;background:${cols[k]}"></div>`;});
+    html+=`</div></div>`;});
+  html+=`<div class="legend">`+keys.map(k=>`<span><i style="background:${cols[k]}"></i>${k}</span>`).join("")+`</div>`;
+  host.innerHTML=html;
+}
+
+function renderGroups(){
+  const gs=DATA.groups||[],host=$("groups");
+  if(!gs.length){host.innerHTML=`<div class="empty">Sin grupos.</div>`;return;}
+  let html="";
+  gs.forEach(g=>{
+    html+=`<div class="gcard"><div class="ghead"><div class="gname">Grupo ${g.letter}</div>`+
+      `<div class="gmeta">${g.played}/${g.total} jugados${g.winner?` \u00b7 \uD83C\uDFC6 ${esc(g.winner)}`:""}</div></div>`;
+    html+=`<table class="gtable"><thead><tr><th>#</th><th>Equipo</th>`+
+      `<th class="num">PJ</th><th class="num">DG</th><th class="num">Pts</th></tr></thead><tbody>`;
+    g.table.forEach(t=>{
+      const cl=t.qualify?"q":(t.third?"t3":"");
+      const gd=(t.GD>0?"+":"")+t.GD;
+      html+=`<tr class="${cl}"><td>${t.pos}</td>`+
+        `<td><span class="flag">${flag(t.team)}</span> ${esc(t.team)}</td>`+
+        `<td class="num">${t.P}</td><td class="num">${gd}</td><td class="num"><b>${t.Pts}</b></td></tr>`;
+    });
+    html+=`</tbody></table>`;
+    html+=`<div class="glabel">Puntos en el grupo</div><div class="gchips">`;
+    if(g.played>0){
+      const mx=Math.max(1,...g.people.map(p=>p.pts));
+      g.people.forEach(p=>{
+        const lead=p.pts>0&&p.pts===mx?" lead":"";
+        html+=`<span class="gchip${lead}"><span class="who">${esc(p.nick)}</span> <b>${p.pts}</b>`+
+          `${p.winner_hit?' <span class="wh">\uD83C\uDFC6</span>':''}</span>`;
+      });
+    }else{
+      html+=`<span class="empty">Aún sin jugar.</span>`;
+    }
+    html+=`</div>`;
+    html+=`<div class="gkey"><span><i style="background:var(--green)"></i>Clasifican (1.º-2.º)</span>`+
+      `<span><i style="background:var(--gold)"></i>3.º (mejor tercero)</span></div>`;
+    html+=`</div>`;
+  });
+  host.innerHTML=html;
+}
+
+const PERF=[["pulpo","\uD83D\uDC19","Pulpo Paul","más marcadores exactos"],
+["francotirador","\uD83C\uDFAF","El francotirador","mejor % de aciertos"],
+["racha","\uD83D\uDD25","Racha","aciertos seguidos"],
+["valiente","\uD83E\uDD81","El valiente","aciertos en solitario"],
+["nostradamus","\uD83D\uDD2E","Nostradamus","mejor jornada"],
+["cohete","\uD83D\uDE80","Cohete","más puestos arriba"],
+["capitan","\uD83E\uDDED","Capitán a bordo","más tiempo líder"]];
+function renderStats(){
+  const s=DATA.stats||{};
+  const card=(def)=>{const[k,em,l,sub]=def;const v=s[k];let who="\u2014",d=sub;
+    if(v&&v.nick){who=v.nick;d=v.detail||sub;}
+    return `<div class="stat"><span class="em">${em}</span><div class="l">${l}</div>`+
+      `<div class="who">${esc(who)}</div><div class="d">${esc(d)}</div></div>`;};
+  let html="";
+  if(s.pleno&&s.pleno.people&&s.pleno.people.length){
+    html+=`<div class="pleno"><span class="em">\u2705</span><div><div class="l">Pleno del día</div>`+
+      `<div class="who">${s.pleno.people.map(p=>esc(p.nick)).join(", ")}</div>`+
+      `<div class="d">clavaron un marcador exacto</div></div></div>`;
+  }
+  html+=`<div class="slabel">Rendimiento</div><div class="stats">`+PERF.map(card).join("")+`</div>`;
+  let style=card(["gafe","\uD83C\uDF27\uFE0F","El gafe","peor jornada"]);
+  const o=s.optimista,c=s.cerrojo;
+  if(o||c){
+    style+=`<div class="stat"><span class="em">\u26BD</span><div class="l">Optimista vs Cerrojo</div>`+
+      `<div class="duo"><div><div class="who">${o?esc(o.nick):"\u2014"}</div><div class="d">${o?esc(o.detail):"más goles"}</div></div>`+
+      `<div class="vs">\u00b7</div><div><div class="who">${c?esc(c.nick):"\u2014"}</div><div class="d">${c?esc(c.detail):"menos goles"}</div></div></div></div>`;
+  }
+  html+=`<div class="slabel">Estilo</div><div class="stats">`+style+`</div>`;
+  $("stats").innerHTML=html;
+}
+
+function renderQuiniela(){
+  const picks=DATA.champion_picks||[];const host=$("quiniela");
+  if(!picks.length){host.innerHTML=`<div class="empty">Sin datos.</div>`;return;}
+  const counts={};picks.forEach(p=>{if(p.pick)counts[p.pick]=(counts[p.pick]||0)+1;});
+  const order=Object.keys(counts).sort((a,b)=>counts[b]-counts[a]);
+  let html=`<div class="lead">A quién apuesta cada uno como campeón:</div>`;
+  order.forEach(team=>{const who=picks.filter(p=>p.pick===team);const al=who[0].alive;
+    let tag="";if(al===true)tag=`<span class="alive">sigue vivo</span>`;else if(al===false)tag=`<span class="out">eliminado</span>`;
+    html+=`<div class="qrow"><div><span class="flag">${flag(team)}</span> <span class="qteam">${esc(team)}</span>`+
+      `<span class="qcount">${counts[team]}</span> <span class="qppl">${who.map(w=>esc(w.nick)).join(", ")}</span></div>${tag}</div>`;});
+  host.innerHTML=html;
+}
+
+function renderFeed(){
+  const feed=DATA.feed||[],host=$("feed");
+  if(!feed.length){host.innerHTML=`<div class="empty">Todavía no se ha jugado ningún partido. Vuelve tras el primer pitido.</div>`;return;}
+  const KLAB={exact:"Exacto",gd:"Result+DG",result:"Ganador",miss:"Fallo"};
+  const fmt=(d)=>new Date(d+"T12:00:00").toLocaleDateString("es-ES",{weekday:"long",day:"numeric",month:"long"});
+  let html="";
+  feed.forEach((day,di)=>{
+    html+=`<div class="day"><div class="dt">${fmt(day.date)}</div>`;
+    if(day.recap)html+=`<div class="recap">${esc(day.recap)}</div>`;
+    day.matches.forEach((m,mi)=>{const pid=`pk-${di}-${mi}`;const picks=m.picks||[];
+      html+=`<div class="match" data-pid="${pid}"><div class="teams">`+
+        `<span class="tm"><span class="flag">${flag(m.home)}</span> ${esc(m.home)}</span>`+
+        `<span class="tm"><span class="flag">${flag(m.away)}</span> ${esc(m.away)}<span class="badge">J${m.md} · ${m.t}</span></span>`+
+        `</div><span class="sc">${m.hg}-${m.ag}${picks.length?`<span class="caret">\u25BE</span>`:""}</span></div>`;
+      if(picks.length){html+=`<div class="picks" id="${pid}" style="display:none">`;
+        picks.forEach(p=>{html+=`<div class="pk"><span>${esc(p.nick)}`+
+          `<span class="ktag kt-${p.kind}">${KLAB[p.kind]||""}</span></span>`+
+          `<span><span class="pr">${esc(p.pred)}</span> &nbsp;<span class="pt">+${p.pts}</span></span></div>`;});
+        html+=`</div>`;}
+    });
+    html+=`</div>`;
+  });
+  host.innerHTML=html;
+  host.querySelectorAll(".match[data-pid]").forEach(el=>el.addEventListener("click",()=>{
+    const t=$(el.dataset.pid);if(t)t.style.display=t.style.display==="none"?"":"none";}));
+}
+
+function rowFor(nick){return (DATA.leaderboard||[]).find(r=>r.nick===nick);}
+function renderH2H(){
+  const lb=DATA.leaderboard||[];const host=$("h2h");
+  if(lb.length<2){host.innerHTML=`<div class="empty">Hacen falta al menos dos participantes.</div>`;return;}
+  const opts=lb.map(r=>`<option value="${esc(r.nick)}">${esc(r.nick)}</option>`).join("");
+  host.innerHTML=`<div class="h2hsel"><select id="h2a">${opts}</select>`+
+    `<span class="vs">vs</span><select id="h2b">${opts}</select></div><div id="h2res"></div>`;
+  const a=$("h2a"),b=$("h2b");
+  a.selectedIndex=0;b.selectedIndex=Math.min(1,lb.length-1);
+  const draw=()=>drawH2H(a.value,b.value);
+  a.onchange=draw;b.onchange=draw;draw();
+}
+function drawH2H(na,nb){
+  const host=$("h2res");
+  if(na===nb){host.innerHTML=`<div class="empty" style="margin-top:14px">Elige dos participantes distintos.</div>`;return;}
+  const ra=rowFor(na),rb=rowFor(nb);if(!ra||!rb)return;
+  let winA=0,winB=0,tie=0,played=0;
+  (DATA.feed||[]).forEach(day=>day.matches.forEach(m=>{
+    const pa=(m.picks||[]).find(p=>p.nick===na),pb=(m.picks||[]).find(p=>p.nick===nb);
+    if(!pa||!pb)return;played++;
+    if(pa.pts>pb.pts)winA++;else if(pb.pts>pa.pts)winB++;else tie++;
+  }));
+  const ka=ra.kpis||{},kb=rb.kpis||{};
+  const metric=(l,va,vb)=>`<tr><td class="ml">${l}</td>`+
+    `<td class="num ${va>=vb?'win':''}">${va}</td><td class="num ${vb>=va?'win':''}">${vb}</td></tr>`;
+  let html=`<table class="h2t"><thead><tr><th></th><th>${esc(na)}</th><th>${esc(nb)}</th></tr></thead><tbody>`;
+  html+=metric("Puntos totales",ra.total,rb.total);
+  html+=metric("Exactos",ka.exact||0,kb.exact||0);
+  html+=metric("Acierto %",ka.pct||0,kb.pct||0);
+  html+=metric("Racha",ka.streak||0,kb.streak||0);
+  ["Grupos","Ganadores","Eliminatorias","Bonus"].forEach(k=>html+=metric(k,ra.buckets[k],rb.buckets[k]));
+  html+=`</tbody></table>`;
+  html+=`<div class="h2hscore"><div>Partido a partido (${played} comparados)</div>`+
+    `<div class="h2bar"><span class="a">${esc(na)}: ${winA}</span>`+
+    `<span class="t">empates: ${tie}</span>`+
+    `<span class="b">${esc(nb)}: ${winB}</span></div>`+
+    `<div class="h2verdict">${winA===winB?'Empate t\u00e9cnico':esc((winA>winB?na:nb))+' va por delante'}</div></div>`;
+  host.innerHTML=html;
+}
+
+function initTabs(){
+  const order=["resumen","grupos","premios","resultados","h2h"];
+  const btns=document.querySelectorAll(".tab-btn");
+  const panes=document.querySelectorAll(".tabpane");
+  function show(id){
+    btns.forEach(b=>b.classList.toggle("active",b.dataset.tab===id));
+    panes.forEach(p=>p.style.display=(p.id==="tab-"+id)?"":"none");
+    if(location.hash!=="#"+id){try{history.replaceState(null,"","#"+id);}catch(e){}}
+  }
+  btns.forEach(b=>b.addEventListener("click",()=>show(b.dataset.tab)));
+  const h=(location.hash||"").replace("#","");
+  show(order.includes(h)?h:"resumen");
+}
+
+renderHeader();renderToday();renderRules();renderPodium();renderLeaderboard();
+renderEvolution();renderCats();renderGroups();renderStats();renderQuiniela();renderFeed();renderH2H();
+initTabs();
+</script>
+</body>
+</html>
